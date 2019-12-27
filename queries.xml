@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<queries>
+    <query id="set_FKC_0">SET FOREIGN_KEY_CHECKS = 0;</query>
+    <query id="drop_books">drop table if exists books;</query>
+    <query id="drop_publisher">drop table if exists publisher;</query>
+    <query id="drop_author">drop table if exists author;</query>
+    <query id="drop_books_inventory">drop table if exists books_inventory;</query>
+    <query id="drop_customer">drop table if exists customer;</query>
+    <query id="drop_orders">drop table if exists orders;</query>
+    <query id="drop_order_item">drop table if exists order_item;</query>
+    <query id="set_FKC_1">SET FOREIGN_KEY_CHECKS = 1;</query>
+    <query id="create_books">create table books(book_id int, author_id int, publisher_id int, title varchar(255),
+        isbn varchar(255), genre varchar(255), type varchar(255), publication_year year(4), price float(10,2),
+        remarks varchar(255), primary key(book_id));</query>
+    <query id="create_publisher">create table publisher(publisher_id int, book_id int, country varchar(255),
+        primary key(publisher_id), foreign key (book_id) references books(book_id));</query>
+    <query id="create_author">create table author(author_id int, book_id int, first_name varchar(255),
+        last_name varchar(255), primary key(author_id), foreign key(book_id) references books(book_id));</query>
+    <query id="create_books_inventory">create table books_inventory(book_id int, stock_count int,
+        primary key(book_id));</query>
+    <query id="create_customer">create table customer(customer_id varchar(255), first_name varchar(255), last_name varchar(255),
+        email_address varchar(255), mobile_number varchar(255), country varchar(255), other_details varchar(255),
+        primary key(customer_id));</query>
+    <query id="create_orders">create table orders(order_id int, customer_id varchar(255), order_date date,
+        sub_total float(10,2), shipping float(10,2), total_value float(10,2), primary key(order_id),
+        foreign key(customer_id) references customer(customer_id));</query>
+    <query id="create_order_item">create table order_item(order_id int, book_id int, quantity int,
+        price int, primary key(order_id, book_id), foreign key(order_id) references orders(order_id),
+        foreign key(book_id) references books(book_id));</query>
+    <query id="constraint_orders">alter table books add foreign key(author_id) references author(author_id);</query>
+    <query id="constraint_publisher">alter table books add foreign key(publisher_id) references publisher(publisher_id);</query>
+    <query id="insert_books_1">insert into books values(1,101,1001,'WINGS OF FIRE', '8173711461', 'inspirational', 'paperback', 2017, 215.00,'Must Read');</query>
+    <query id="insert_books_2">insert into books values(2,102,1002,'The Wit and Wisdom of Ratan Tata', '9789385827297', 'Wisdom', 'paperback', 2018, 270.00,'One Time Read');</query>
+    <query id="insert_books_3">insert into books values(3,103,1003,'The Secret', '1847370292', 'documentary', 'paperback', 2017, 550.00,'Good to Read');</query>
+    <query id="insert_publisher_1">insert into publisher values(1001,1,'india');</query>
+    <query id="insert_publisher_2">insert into publisher values(1002,2,'india');</query>
+    <query id="insert_publisher_3">insert into publisher values(1003,3,'india');</query>
+    <query id="insert_author_1">insert into author values(101,1,'abdul','kalam');</query>
+    <query id="insert_author_2">insert into author values(102,2,'ratan','tata');</query>
+    <query id="insert_author_3">insert into author values(103,3,'rhonda','byrne');</query>
+    <query id="insert_books_inventory_1">insert into books_inventory values(1,10);</query>
+    <query id="insert_books_inventory_2">insert into books_inventory values(2,5);</query>
+    <query id="insert_books_inventory_3">insert into books_inventory values(3,0);</query>
+    <query id="insert_customer_1">insert into customer values('c1','andy','roberts','andyroberts@gmail.com','123456789','usa','ca');</query>
+    <query id="insert_customer_2">insert into customer values('c2','carl','richardson','carlrichardson@gmail.com','987654321','uk','lon');</query>
+    <query id="insert_customer_3">insert into customer values('c3','sara','parker','saraparker@gmail.com','1234543210','uk','lon');</query>
+    <query id="insert_orders_1">insert into orders values(101,'c1','2019-12-20',215.00,40.00,265.00);</query>
+    <query id="insert_orders_2">insert into orders values(102,'c2','2019-12-21',270.00,40.00,310.00);</query>
+    <query id="insert_orders_3">insert into orders values(103,'c3','2019-12-22',540.00,40.00,580.00);</query>
+    <query id="insert_order_item_1">insert into order_item values(101,1,1,270);</query>
+    <query id="insert_order_item_2">insert into order_item values(102,3,3,1620);</query>
+    <query id="select_books">select * from books;</query>
+    <query id="select_publisher">select * from publisher;</query>
+    <query id="select_author">select * from author;</query>
+    <query id="select_books_inventory">select * from books_inventory;</query>
+    <query id="select_customer">select * from customer;</query>
+    <query id="select_orders">select * from orders;</query>
+    <query id="select_order_item">select * from order_item;</query>
+</queries>
